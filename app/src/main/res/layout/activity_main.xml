@@ -23,22 +23,6 @@
         tools:layout_editor_absoluteX="0dp" />
 
     <ImageView
-        android:id="@+id/background2"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:adjustViewBounds="false"
-        android:cropToPadding="false"
-        android:scaleType="fitXY"
-        android:scaleX="1"
-        android:scaleY="1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/background"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="0dp" />
-
-    <ImageView
         android:id="@+id/bird_fly"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -75,5 +59,25 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/ground1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="fitCenter"
+        android:scaleY="2.75"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:srcCompat="@drawable/ground"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <ImageView
+        android:id="@+id/ground2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="fitCenter"
+        android:scaleY="2.8"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:srcCompat="@drawable/ground"
+        tools:layout_editor_absoluteX="0dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

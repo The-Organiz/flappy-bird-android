@@ -16,24 +16,24 @@ class MainActivity : AppCompatActivity() {
 
         // set moving background
         setContentView(R.layout.activity_main)
-        moveBackground()
+        moveGround()
         // animate static bird
         val bird = bounceBird(flapBird())
     }
 
-    fun moveBackground(){
-        val backgroundOne = findViewById<ImageView>(R.id.background1);
-        val backgroundTwo = findViewById<ImageView>(R.id.background2);
+    fun moveGround(){
+        val ground1 = findViewById<ImageView>(R.id.ground1);
+        val ground2 = findViewById<ImageView>(R.id.ground2);
         val animator = ValueAnimator.ofFloat(0.0f, -1.0f) // change sign for reverse
         animator.repeatCount = ValueAnimator.INFINITE
         animator.interpolator = LinearInterpolator()
-        animator.duration = 10000L
+        animator.duration = 2500L
         animator.addUpdateListener { animation ->
             val progress = animation.animatedValue as Float
-            val width = backgroundOne.width.toFloat()
+            val width = ground1.width.toFloat()
             val translationX = width * progress
-            backgroundOne.translationX = translationX
-            backgroundTwo.translationX = translationX + width // change to - for reverse
+            ground1.translationX = translationX
+            ground2.translationX = translationX + width // change to - for reverse
         }
         animator.start()
     }
