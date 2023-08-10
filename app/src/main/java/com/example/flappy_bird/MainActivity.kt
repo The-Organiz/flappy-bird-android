@@ -2,11 +2,13 @@ package com.example.flappy_bird
 
 //import android.R
 //import android.R
-import com.example.flappy_bird.R
+
 import android.animation.ValueAnimator
 import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
 import android.view.View
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.view.animation.LinearInterpolator
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
@@ -42,5 +44,10 @@ class MainActivity : AppCompatActivity() {
         frameAnimation.start()
 
         // animate bouncing bird
+        val animUpDown = AnimationUtils.loadAnimation(
+            applicationContext,
+            R.anim.up_down
+        )
+        img.startAnimation(animUpDown)
     }
 }
