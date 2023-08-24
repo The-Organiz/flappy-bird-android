@@ -13,9 +13,13 @@ import androidx.appcompat.app.AppCompatActivity
 class MainActivity : AppCompatActivity() {
     private lateinit var bird: ImageView;
     private var started: Boolean = false;
+    // negative is up, positive is down
     private var posY: Float = 0f;
     private var dy: Float = 0.05f;
-    private val ddy: Float = 0.01f;
+    // constants
+    private val gravity: Float = 0.003f;
+    private val maxSpeed: Float = 0.05f;
+    private val flapSpeed: Float = -0.05f;
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // set moving background
@@ -61,17 +65,19 @@ class MainActivity : AppCompatActivity() {
 
     fun screenTapped(view: View?) {
         bird = findViewById<ImageView>(R.id.bird_fly);
-
-        val animator = ValueAnimator.ofFloat(1f, 0.0f)
-        animator.interpolator = LinearInterpolator()
-        animator.duration = 1000L
-        animator.addUpdateListener { animation ->
-            val progress = animation.animatedValue as Float
-            val height = bird.height.toFloat()
-            val translationY = height * progress
-            bird.translationY = translationY
-        }
-        animator.start()
+       // val animator = ValueAnimator.ofFloat(posY, posY - 0.5f)
+        dy = flapSpeed + gravity
+        //posY = posY + 0.5f
+//        animator.interpolator = LinearInterpolator()
+//        animator.duration = 1000L
+//        animator.addUpdateListener { animation ->
+//            val progress = animation.animatedValue as Float
+//            val height = bird.height.toFloat()
+//            val translationY = height * progress
+//            bird.translationY = translationY
+//            dy = 0.05f
+//        }
+//        animator.start()
 
         if(!started) {
             started = true
@@ -86,7 +92,9 @@ class MainActivity : AppCompatActivity() {
         var end = posY + dy
         animator.addUpdateListener { _ ->
             dropBird(posY, end)
-            dy += ddy
+            if(dy < maxSpeed) {
+                dy += gravity
+            }
             posY = end
             end += dy
         }
