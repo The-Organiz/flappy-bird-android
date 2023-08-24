@@ -4,8 +4,10 @@ import android.animation.ValueAnimator
 import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
 import android.view.View
+import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.view.animation.LinearInterpolator
+import android.view.animation.RotateAnimation
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 
@@ -14,12 +16,18 @@ class MainActivity : AppCompatActivity() {
     private lateinit var bird: ImageView;
     private var started: Boolean = false;
     // negative is up, positive is down
+    // negative is clockwise
     private var posY: Float = 0f;
     private var dy: Float = 0.05f;
+    private var rotationSpeed = 0.1f
     // constants
     private val gravity: Float = 0.003f;
     private val maxSpeed: Float = 0.05f;
     private val flapSpeed: Float = -0.05f;
+    private val rotationAcceleration = 0.01f;
+    private val maxRotation = 90f;
+    private val initialRotationSpeed = 0.1f;
+    private val flapRotation = -80f;
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // set moving background
@@ -65,20 +73,9 @@ class MainActivity : AppCompatActivity() {
 
     fun screenTapped(view: View?) {
         bird = findViewById<ImageView>(R.id.bird_fly);
-       // val animator = ValueAnimator.ofFloat(posY, posY - 0.5f)
-        dy = flapSpeed + gravity
-        //posY = posY + 0.5f
-//        animator.interpolator = LinearInterpolator()
-//        animator.duration = 1000L
-//        animator.addUpdateListener { animation ->
-//            val progress = animation.animatedValue as Float
-//            val height = bird.height.toFloat()
-//            val translationY = height * progress
-//            bird.translationY = translationY
-//            dy = 0.05f
-//        }
-//        animator.start()
-
+        dy = flapSpeed - gravity
+        bird.rotation = flapRotation
+        rotationSpeed = initialRotationSpeed
         if(!started) {
             started = true
             gameLoop()
@@ -95,6 +92,7 @@ class MainActivity : AppCompatActivity() {
             if(dy < maxSpeed) {
                 dy += gravity
             }
+            rotationSpeed += rotationAcceleration
             posY = end
             end += dy
         }
@@ -109,7 +107,12 @@ class MainActivity : AppCompatActivity() {
             val height = bird.height.toFloat()
             val translationY = height * progress
             bird.translationY = translationY
+            if(bird.rotation < maxRotation) {
+                bird.rotation += rotationSpeed
+            }
         }
         animator.start()
+
+
     }
 }
