@@ -24,10 +24,10 @@ class MainActivity : AppCompatActivity() {
     private val gravity: Float = 0.003f;
     private val maxSpeed: Float = 0.05f;
     private val flapSpeed: Float = -0.05f;
-    private val rotationAcceleration = 0.01f;
+    private val rotationAcceleration = 0.001f;
     private val maxRotation = 90f;
     private val initialRotationSpeed = 0.1f;
-    private val flapRotation = -80f;
+    private val flapRotation = -45f;
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // set moving background
